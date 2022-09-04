@@ -1,3 +1,5 @@
 # Pio Setup
 
-Personal scripts to setup different machines on different environments, quickly!
+My setup scripts to setup developer environments on different machines.
+
+
