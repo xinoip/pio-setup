@@ -74,6 +74,12 @@ echo "Setup alacritty config";
 mkdir -p ${conf_home}/.config/alacritty;
 echo ${conf_alacritty} > ${conf_home}/.config/alacritty/alacritty.yml;
 
+echo "Setup vcpkg";
+mkdir -p ${conf_home}/repo;
+git clone https://github.com/Microsoft/vcpkg.git ${conf_home}/repo/vcpkg;
+cd ${conf_home}/repo
+./vcpkg/bootstrap-vcpkg.sh
+
 echo -e "\n\n\n";
 echo "If we lived through all of it... here are the manual stuff to do!";
 echo "Sync programs: vscode, brave";
