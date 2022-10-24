@@ -13,7 +13,7 @@ sudo apt-get update -y;
 sudo apt-get upgrade -y;
 echo "Download stuff";
 sudo apt-get install clang clang-tidy clang-format zsh xclip;
-sudo apt-get install cmake curl zip unzip tar;
+sudo apt-get install cmake curl zip unzip tar fzf;
 
 # echo "Creating ssh key...";
 # ssh-keygen -t ed25519 -C "${conf_ssh_comment}"
@@ -23,15 +23,14 @@ sudo apt-get install cmake curl zip unzip tar;
 # echo "Created ssh key and copied it to clipboard";
 
 echo "= Setup zsh =";
-echo "Setup oh-my-zsh";
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-mkdir -p "${conf_ohmyzsh_custom_dir}";
-echo "Get zsh plugins";
-/usr/bin/git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $conf_ohmyzsh_custom_dir/plugins/zsh-syntax-highlighting;
-/usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions.git $conf_ohmyzsh_custom_dir/plugins/zsh-autosuggestions;
-/usr/bin/git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $conf_ohmyzsh_custom_dir/themes/powerlevel10k;
+echo "Setup antigen";
+curl -L git.io/antigen > ${conf_home}/antigen.zsh;
 echo "Setup .zshrc";
 echo "${conf_zshrc}" > ${conf_home}/.zshrc;
+
+echo "= Setup Rust = "
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh;
+cargo install lsd
 
 echo "Setup vcpkg";
 mkdir -p ${conf_home}/repo;
